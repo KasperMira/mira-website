@@ -75,14 +75,25 @@ export const localeLabels: Record<Locale, string> = {
   de: "Deutsch"
 };
 
+function withBase(path: string): string {
+  const base = import.meta.env.BASE_URL || "/";
+  const normalizedBase = base.endsWith("/") ? base.slice(0, -1) : base;
+
+  if (path === "/") {
+    return normalizedBase ? `${normalizedBase}/` : "/";
+  }
+
+  return `${normalizedBase}${path}`;
+}
+
 export function getPath(locale: Locale, pageKey: PageKey): string {
   const slug = pageSlugs[locale][pageKey];
 
   if (locale === "nl") {
-    return slug ? `/${slug}` : "/";
+    return withBase(slug ? `/${slug}` : "/");
   }
 
-  return slug ? `/${locale}/${slug}` : `/${locale}/`;
+  return withBase(slug ? `/${locale}/${slug}` : `/${locale}/`);
 }
 
 export function getPageKeyBySlug(locale: Locale, slug: string): PageKey | undefined {

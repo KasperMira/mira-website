@@ -12,7 +12,8 @@ interface Props {
 }
 
 const { locale, pageKey, title, description } = Astro.props;
-const siteUrl = Astro.site ?? new URL("https://www.mirasoftware.be");
+const siteUrl = Astro.site ?? new URL("https://kaspermira.github.io");
+const basePath = import.meta.env.BASE_URL;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 const alternateLinks = locales.map((targetLocale) => ({
   hrefLang: targetLocale,
@@ -31,8 +32,8 @@ const defaultHref = new URL(getPath("nl", pageKey), siteUrl).toString();
     <link rel="canonical" href={canonicalUrl.toString()} />
     {alternateLinks.map((link) => <link rel="alternate" hreflang={link.hrefLang} href={link.href} />)}
     <link rel="alternate" hreflang="x-default" href={defaultHref} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
+    <link rel="icon" href={`${basePath}favicon.ico`} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="MIRA Software" />
     <meta property="og:title" content={title} />
