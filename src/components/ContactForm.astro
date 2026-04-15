@@ -1,0 +1,114 @@
+---
+import type { Locale } from "../data/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const t: Record<Locale, {
+  heading: string;
+  intro: string;
+  name: string;
+  email: string;
+  company: string;
+  message: string;
+  submit: string;
+}> = {
+  nl: {
+    heading: "Stuur ons een bericht",
+    intro: "Vul het formulier in en we nemen zo snel mogelijk contact met u op.",
+    name: "Naam",
+    email: "E-mailadres",
+    company: "Bedrijf",
+    message: "Bericht",
+    submit: "Versturen"
+  },
+  fr: {
+    heading: "Envoyez-nous un message",
+    intro: "Remplissez le formulaire et nous vous recontacterons dans les plus brefs délais.",
+    name: "Nom",
+    email: "Adresse e-mail",
+    company: "Entreprise",
+    message: "Message",
+    submit: "Envoyer"
+  },
+  it: {
+    heading: "Inviaci un messaggio",
+    intro: "Compila il modulo e ti ricontatteremo il prima possibile.",
+    name: "Nome",
+    email: "Indirizzo e-mail",
+    company: "Azienda",
+    message: "Messaggio",
+    submit: "Invia"
+  },
+  de: {
+    heading: "Senden Sie uns eine Nachricht",
+    intro: "Füllen Sie das Formular aus und wir melden uns schnellstmöglich bei Ihnen.",
+    name: "Name",
+    email: "E-Mail-Adresse",
+    company: "Unternehmen",
+    message: "Nachricht",
+    submit: "Senden"
+  }
+};
+
+const labels = t[locale];
+---
+
+<section class="mx-auto max-w-3xl px-4 py-12">
+  <h2 class="text-2xl font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-red)]">{labels.heading}</h2>
+  <p class="mt-2 text-sm text-slate-700">{labels.intro}</p>
+  <form
+    class="mt-6 space-y-4"
+    onsubmit="event.preventDefault();"
+    aria-label={labels.heading}
+  >
+    <div class="grid gap-4 sm:grid-cols-2">
+      <label class="block text-sm">
+        <span class="block font-semibold text-slate-800">{labels.name}</span>
+        <input
+          type="text"
+          name="name"
+          required
+          class="mt-1 w-full rounded-sm border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-[var(--color-mira-red)] focus:outline-none focus:ring-1 focus:ring-[var(--color-mira-red)]"
+        />
+      </label>
+      <label class="block text-sm">
+        <span class="block font-semibold text-slate-800">{labels.email}</span>
+        <input
+          type="email"
+          name="email"
+          required
+          class="mt-1 w-full rounded-sm border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-[var(--color-mira-red)] focus:outline-none focus:ring-1 focus:ring-[var(--color-mira-red)]"
+        />
+      </label>
+    </div>
+    <label class="block text-sm">
+      <span class="block font-semibold text-slate-800">{labels.company}</span>
+      <input
+        type="text"
+        name="company"
+        class="mt-1 w-full rounded-sm border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-[var(--color-mira-red)] focus:outline-none focus:ring-1 focus:ring-[var(--color-mira-red)]"
+      />
+    </label>
+    <label class="block text-sm">
+      <span class="block font-semibold text-slate-800">{labels.message}</span>
+      <textarea
+        name="message"
+        rows="5"
+        required
+        class="mt-1 w-full rounded-sm border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-[var(--color-mira-red)] focus:outline-none focus:ring-1 focus:ring-[var(--color-mira-red)]"
+      ></textarea>
+    </label>
+    <div class="flex justify-end">
+      <button
+        type="submit"
+        class="rounded-sm bg-[var(--color-mira-red)] px-5 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:brightness-110"
+      >
+        {labels.submit}
+      </button>
+    </div>
+  </form>
+</section>

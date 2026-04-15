@@ -4,6 +4,7 @@ import { siteContent } from "../data/site-content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSection from "./Sections/HeroSection.astro";
 import ContentSections from "./Sections/ContentSections.astro";
+import ContactForm from "./ContactForm.astro";
 
 interface Props {
   locale: Locale;
@@ -25,4 +26,5 @@ const page = siteContent[locale].pages[pageKey];
     secondaryHref={getPath(locale, "aboutMira")}
   />
   <ContentSections sections={page.sections} />
+  {pageKey === "contact" && <ContactForm locale={locale} />}
 </BaseLayout>

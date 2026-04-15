@@ -6,8 +6,7 @@ This note captures the visual direction observed in the supplied frontpage scree
 
 - Primary dark: `#202326` (charcoal background for hero/footer)
 - Secondary dark: `#34383C` (divider bars / dark UI surfaces)
-- Accent yellow: `#F2CE2F` (hero highlight, key emphasis)
-- Accent red: `#D8232A` (primary CTAs, active states)
+- Accent red: `#D8232A` (primary CTAs, active states, hero highlights, key emphasis)
 - Surface light: `#F3F4F5` (page background)
 - Card white: `#FFFFFF` (content cards and forms)
 - Body text dark: `#1F2937`
@@ -63,7 +62,7 @@ This note captures the visual direction observed in the supplied frontpage scree
 - Use reusable CSS custom properties for the palette.
 - Prefer consistent uppercase treatment for primary headings and navigation.
 - Keep shadows, borders, and spacing consistent to avoid mixed visual styles.
-- Reserve yellow and red for emphasis and action points.
+- Reserve red for emphasis and action points.
 
 ## Source Assets Used
 

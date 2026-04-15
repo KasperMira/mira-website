@@ -11,7 +11,6 @@
 @theme {
   --font-sans: "Open Sans", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-display: "Oswald", "Open Sans", sans-serif;
-  --color-mira-yellow: #f2ce2f;
   --color-mira-red: #d8232a;
   --color-mira-charcoal: #202326;
   --color-mira-graphite: #34383c;
@@ -26,6 +25,8 @@ body {
   font-family: var(--font-sans);
   background: var(--color-mira-soft);
   color: #1f2937;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -37,20 +38,320 @@ h4 {
 }
 
 .mira-section-title {
+  position: relative;
   color: var(--color-mira-charcoal);
   font-size: clamp(1.6rem, 3vw, 2.3rem);
   text-transform: uppercase;
+  padding-bottom: 0.85rem;
+}
+.mira-section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 4px;
+  background: var(--color-mira-red);
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.mira-section-title:hover::after {
+  width: 96px;
+}
+
+.mira-title-accent {
+  position: relative;
+  display: inline-block;
+}
+.mira-title-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35em;
+  width: 72px;
+  height: 6px;
+  background: var(--color-mira-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: miraAccent 0.9s 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes miraAccent {
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .mira-divider {
-  background: linear-gradient(90deg, #24272a 0%, #3a3f44 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.75rem 1.5rem !important;
+  background:
+    linear-gradient(90deg, rgba(216, 35, 42, 0.18) 0%, transparent 40%, transparent 60%, rgba(216, 35, 42, 0.18) 100%),
+    linear-gradient(90deg, #1b1e21 0%, #2a2e32 50%, #1b1e21 100%);
   color: #fff;
-  letter-spacing: 0.08em;
+  font-family: var(--font-display);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-size: 0.72rem;
+  font-size: 1rem !important;
   font-weight: 700;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+.mira-divider::before,
+.mira-divider::after {
+  content: "";
+  flex: 1 1 auto;
+  max-width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-mira-red));
+  opacity: 0.9;
+}
+.mira-divider::after {
+  background: linear-gradient(90deg, var(--color-mira-red), transparent);
+}
+.mira-divider > .mira-divider-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 0 1 auto;
+  text-align: center;
+}
+.mira-divider > .mira-divider-text::before,
+.mira-divider > .mira-divider-text::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--color-mira-red);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 3px rgba(216, 35, 42, 0.18);
+  flex: 0 0 auto;
+}
+
+@media (min-width: 768px) {
+  .mira-divider {
+    font-size: 1.15rem !important;
+    letter-spacing: 0.28em;
+    padding: 2.1rem 2rem !important;
+  }
 }
 
 .mira-shadow-card {
-  box-shadow: 0 12px 30px rgba(28, 32, 36, 0.12);
+  box-shadow:
+    0 1px 2px rgba(28, 32, 36, 0.04),
+    0 12px 30px rgba(28, 32, 36, 0.08);
+}
+
+.mira-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.35s ease;
+  overflow: hidden;
+}
+.mira-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-mira-red);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.mira-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 2px 4px rgba(28, 32, 36, 0.05),
+    0 22px 50px rgba(28, 32, 36, 0.14);
+  border-color: #d1d5db;
+}
+.mira-card:hover::before {
+  transform: scaleY(1);
+}
+
+.mira-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--color-mira-red);
+  color: #fff;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 8px 18px rgba(216, 35, 42, 0.28);
+}
+.mira-btn-primary::after {
+  content: "→";
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.mira-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(216, 35, 42, 0.36);
+}
+.mira-btn-primary:hover::after {
+  transform: translateX(4px);
+}
+
+.mira-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+  border-radius: 2px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.mira-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+.mira-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background: var(--color-mira-red);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(216, 35, 42, 0.32);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.mira-card:hover .mira-icon-badge {
+  transform: rotate(90deg) scale(1.05);
+}
+
+.mira-fade-up {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: miraFadeUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.mira-fade-up-delay-1 { animation-delay: 0.12s; }
+.mira-fade-up-delay-2 { animation-delay: 0.24s; }
+.mira-fade-up-delay-3 { animation-delay: 0.36s; }
+
+@keyframes miraFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mira-tile {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.5s ease;
+}
+.mira-tile img {
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.6s ease;
+}
+.mira-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.78) 100%);
+  transition: opacity 0.4s ease;
+}
+.mira-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 44px rgba(28, 32, 36, 0.2);
+}
+.mira-tile:hover img {
+  transform: scale(1.08);
+  filter: saturate(1.1);
+}
+.mira-tile-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.9rem 1rem;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.82rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mira-tile-label::after {
+  content: "→";
+  color: var(--color-mira-red);
+  transform: translateX(-6px);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.mira-tile:hover .mira-tile-label::after {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.mira-hero-bar {
+  display: inline-block;
+  width: 64px;
+  height: 4px;
+  background: var(--color-mira-red);
+  margin-bottom: 1.25rem;
+  transform-origin: left;
+  animation: miraAccent 0.9s 0.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.mira-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(216, 35, 42, 0.35);
+  color: var(--color-mira-red);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.mira-eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--color-mira-red);
+  border-radius: 9999px;
+  box-shadow: 0 0 0 3px rgba(216, 35, 42, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

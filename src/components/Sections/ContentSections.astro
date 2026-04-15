@@ -12,9 +12,9 @@ const { sections } = Astro.props;
   {sections.map((section) => {
     if (section.type === "text") {
       return (
-        <section class="mira-shadow-card rounded-sm border border-slate-200 bg-white p-8 md:p-10">
+        <section class="mira-card mira-shadow-card relative rounded-sm p-8 md:p-10">
           <h2 class="mira-section-title">{section.title}</h2>
-          <div class="mt-5 space-y-3 text-slate-600">
+          <div class="mt-6 space-y-3 leading-7 text-slate-600">
             {section.body.map((paragraph) => (
               <p>{paragraph}</p>
             ))}
@@ -27,12 +27,10 @@ const { sections } = Astro.props;
       return (
         <section>
           <h2 class="mira-section-title">{section.title}</h2>
-          <div class="mt-6 grid gap-4 md:grid-cols-2">
+          <div class="mt-8 grid gap-4 md:grid-cols-2">
             {section.items.map((item) => (
-              <article class="mira-shadow-card rounded-sm border border-slate-200 bg-white p-6">
-                <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-mira-red)] text-sm font-semibold text-white">
-                  +
-                </div>
+              <article class="mira-card mira-shadow-card rounded-sm p-7">
+                <div class="mira-icon-badge mb-4 text-sm">+</div>
                 <h3 class="text-xl uppercase tracking-[0.03em] text-[var(--color-mira-charcoal)]">{item.title}</h3>
                 <p class="mt-2 text-sm leading-6 text-slate-600">{item.body}</p>
               </article>
@@ -44,11 +42,19 @@ const { sections } = Astro.props;
 
     if (section.type === "quote") {
       return (
-        <section class="relative overflow-hidden rounded-sm bg-[var(--color-mira-charcoal)] p-8 text-white md:p-10">
-          <div class="absolute right-0 top-0 h-24 w-24 bg-[var(--color-mira-red)] opacity-80"></div>
-          <p class="relative text-2xl leading-relaxed">"{section.quote}"</p>
-          <p class="relative mt-5 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-yellow)]">{section.author}</p>
-          <p class="relative mt-1 text-sm text-slate-200">{section.role}</p>
+        <section class="relative overflow-hidden rounded-sm bg-[var(--color-mira-charcoal)] p-10 text-white md:p-14">
+          <div class="absolute right-0 top-0 h-32 w-32 bg-[var(--color-mira-red)] opacity-80"></div>
+          <div class="absolute right-32 top-0 h-32 w-2 bg-[var(--color-mira-red)] opacity-70"></div>
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_10%_90%,rgba(216,35,42,0.12),transparent_40%)]"></div>
+          <span class="relative font-display text-7xl leading-none text-[var(--color-mira-red)]">&#8220;</span>
+          <p class="relative -mt-6 max-w-3xl text-2xl leading-relaxed md:text-3xl">{section.quote}</p>
+          <div class="relative mt-7 flex items-center gap-4">
+            <span class="h-px w-10 bg-[var(--color-mira-red)]"></span>
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--color-mira-red)]">{section.author}</p>
+              <p class="mt-1 text-sm text-slate-300">{section.role}</p>
+            </div>
+          </div>
         </section>
       );
     }
@@ -57,9 +63,12 @@ const { sections } = Astro.props;
       return (
         <section>
           <h2 class="mira-section-title">{section.title}</h2>
-          <ul class="mt-6 grid gap-3 text-slate-600 md:grid-cols-2">
+          <ul class="mt-8 grid gap-3 text-slate-700 md:grid-cols-2">
             {section.items.map((item) => (
-              <li class="mira-shadow-card rounded-sm border border-slate-200 bg-white px-4 py-3">{item}</li>
+              <li class="mira-card mira-shadow-card group flex items-center gap-3 rounded-sm px-5 py-4">
+                <span class="inline-flex h-2 w-2 shrink-0 rounded-full bg-[var(--color-mira-red)] transition group-hover:scale-150"></span>
+                <span>{item}</span>
+              </li>
             ))}
           </ul>
         </section>
@@ -67,15 +76,11 @@ const { sections } = Astro.props;
     }
 
     return (
-      <section class="rounded-sm border border-slate-200 bg-white p-8 md:p-10">
+      <section class="relative overflow-hidden rounded-sm border border-slate-200 bg-white p-8 md:p-12">
+        <div class="absolute right-0 top-0 h-1 w-40 bg-[linear-gradient(90deg,var(--color-mira-red)_0%,var(--color-mira-red)_100%)]"></div>
         <h2 class="mira-section-title">{section.title}</h2>
-        <p class="mt-4 text-slate-700">{section.body}</p>
-        <a
-          href={section.primaryHref}
-          class="mt-6 inline-flex rounded-sm bg-[var(--color-mira-red)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:brightness-110"
-        >
-          {section.primaryLabel}
-        </a>
+        <p class="mt-5 max-w-3xl leading-7 text-slate-700">{section.body}</p>
+        <a href={section.primaryHref} class="mira-btn-primary mt-7">{section.primaryLabel}</a>
       </section>
     );
   })}

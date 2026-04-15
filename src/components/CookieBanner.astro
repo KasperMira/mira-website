@@ -1,0 +1,255 @@
+---
+import type { Locale } from "../data/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const translations: Record<Locale, {
+  title: string;
+  body: string;
+  accept: string;
+  reject: string;
+  settings: string;
+  necessary: string;
+  necessaryDesc: string;
+  analytics: string;
+  analyticsDesc: string;
+  marketing: string;
+  marketingDesc: string;
+  save: string;
+  close: string;
+}> = {
+  nl: {
+    title: "Wij gebruiken cookies",
+    body: "We gebruiken cookies om de werking van de site te garanderen en, met uw toestemming, om het gebruik te analyseren en inhoud te personaliseren. U kunt uw keuze op elk moment wijzigen.",
+    accept: "Alles accepteren",
+    reject: "Alles weigeren",
+    settings: "Instellingen",
+    necessary: "Noodzakelijk",
+    necessaryDesc: "Vereist voor de basiswerking van de site. Kan niet worden uitgeschakeld.",
+    analytics: "Analytisch",
+    analyticsDesc: "Helpt ons begrijpen hoe bezoekers de site gebruiken.",
+    marketing: "Marketing",
+    marketingDesc: "Gebruikt voor gepersonaliseerde advertenties en content.",
+    save: "Voorkeuren opslaan",
+    close: "Sluiten"
+  },
+  fr: {
+    title: "Nous utilisons des cookies",
+    body: "Nous utilisons des cookies pour assurer le fonctionnement du site et, avec votre consentement, pour analyser l'utilisation et personnaliser le contenu. Vous pouvez modifier votre choix à tout moment.",
+    accept: "Tout accepter",
+    reject: "Tout refuser",
+    settings: "Paramètres",
+    necessary: "Nécessaires",
+    necessaryDesc: "Requis pour le fonctionnement de base du site. Ne peut pas être désactivé.",
+    analytics: "Analytiques",
+    analyticsDesc: "Nous aide à comprendre comment les visiteurs utilisent le site.",
+    marketing: "Marketing",
+    marketingDesc: "Utilisés pour des publicités et contenus personnalisés.",
+    save: "Enregistrer les préférences",
+    close: "Fermer"
+  },
+  it: {
+    title: "Utilizziamo i cookie",
+    body: "Utilizziamo i cookie per garantire il funzionamento del sito e, con il vostro consenso, per analizzare l'utilizzo e personalizzare i contenuti. Potete modificare la vostra scelta in qualsiasi momento.",
+    accept: "Accetta tutto",
+    reject: "Rifiuta tutto",
+    settings: "Impostazioni",
+    necessary: "Necessari",
+    necessaryDesc: "Richiesti per il funzionamento di base del sito. Non possono essere disattivati.",
+    analytics: "Analitici",
+    analyticsDesc: "Ci aiutano a capire come i visitatori usano il sito.",
+    marketing: "Marketing",
+    marketingDesc: "Utilizzati per annunci e contenuti personalizzati.",
+    save: "Salva preferenze",
+    close: "Chiudi"
+  },
+  de: {
+    title: "Wir verwenden Cookies",
+    body: "Wir verwenden Cookies, um den Betrieb der Website zu gewährleisten und, mit Ihrer Zustimmung, um die Nutzung zu analysieren und Inhalte zu personalisieren. Sie können Ihre Auswahl jederzeit ändern.",
+    accept: "Alle akzeptieren",
+    reject: "Alle ablehnen",
+    settings: "Einstellungen",
+    necessary: "Notwendig",
+    necessaryDesc: "Erforderlich für den Grundbetrieb der Website. Kann nicht deaktiviert werden.",
+    analytics: "Analytisch",
+    analyticsDesc: "Hilft uns zu verstehen, wie Besucher die Website nutzen.",
+    marketing: "Marketing",
+    marketingDesc: "Wird für personalisierte Anzeigen und Inhalte verwendet.",
+    save: "Einstellungen speichern",
+    close: "Schließen"
+  }
+};
+
+const t = translations[locale];
+---
+
+<div id="mira-cookie-banner" data-state="hidden" class="fixed inset-x-0 bottom-0 z-[100] hidden px-4 pb-4 sm:px-6 sm:pb-6">
+  <div class="mx-auto max-w-4xl rounded-md bg-white text-slate-900 shadow-2xl ring-1 ring-black/10">
+    <div data-view="main" class="p-5 sm:p-6">
+      <h2 class="text-base font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-red)]">{t.title}</h2>
+      <p class="mt-2 text-sm text-slate-700">{t.body}</p>
+      <div class="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-end">
+        <button
+          type="button"
+          data-cookie-action="settings"
+          class="rounded-sm border border-slate-300 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-slate-700 transition hover:bg-slate-100"
+        >
+          {t.settings}
+        </button>
+        <button
+          type="button"
+          data-cookie-action="reject"
+          class="rounded-sm border border-slate-300 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-slate-700 transition hover:bg-slate-100"
+        >
+          {t.reject}
+        </button>
+        <button
+          type="button"
+          data-cookie-action="accept"
+          class="rounded-sm bg-[var(--color-mira-red)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:brightness-110"
+        >
+          {t.accept}
+        </button>
+      </div>
+    </div>
+
+    <div data-view="settings" hidden class="p-5 sm:p-6">
+      <h2 class="text-base font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-red)]">{t.settings}</h2>
+      <div class="mt-4 space-y-4">
+        <label class="flex items-start gap-3">
+          <input type="checkbox" checked disabled class="mt-1" />
+          <span>
+            <span class="block text-sm font-semibold">{t.necessary}</span>
+            <span class="block text-xs text-slate-600">{t.necessaryDesc}</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3">
+          <input type="checkbox" data-cookie-category="analytics" class="mt-1" />
+          <span>
+            <span class="block text-sm font-semibold">{t.analytics}</span>
+            <span class="block text-xs text-slate-600">{t.analyticsDesc}</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3">
+          <input type="checkbox" data-cookie-category="marketing" class="mt-1" />
+          <span>
+            <span class="block text-sm font-semibold">{t.marketing}</span>
+            <span class="block text-xs text-slate-600">{t.marketingDesc}</span>
+          </span>
+        </label>
+      </div>
+      <div class="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-end">
+        <button
+          type="button"
+          data-cookie-action="reject"
+          class="rounded-sm border border-slate-300 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-slate-700 transition hover:bg-slate-100"
+        >
+          {t.reject}
+        </button>
+        <button
+          type="button"
+          data-cookie-action="save"
+          class="rounded-sm bg-[var(--color-mira-red)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:brightness-110"
+        >
+          {t.save}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Consent = {
+    necessary: true;
+    analytics: boolean;
+    marketing: boolean;
+    timestamp: string;
+    version: 1;
+  };
+
+  const STORAGE_KEY = "mira-cookie-consent";
+  const VERSION = 1;
+
+  const banner = document.getElementById("mira-cookie-banner");
+  if (banner) {
+    const mainView = banner.querySelector<HTMLElement>('[data-view="main"]')!;
+    const settingsView = banner.querySelector<HTMLElement>('[data-view="settings"]')!;
+    const analyticsInput = banner.querySelector<HTMLInputElement>('[data-cookie-category="analytics"]')!;
+    const marketingInput = banner.querySelector<HTMLInputElement>('[data-cookie-category="marketing"]')!;
+
+    const show = () => {
+      banner.classList.remove("hidden");
+      banner.dataset.state = "visible";
+    };
+    const hide = () => {
+      banner.classList.add("hidden");
+      banner.dataset.state = "hidden";
+    };
+    const showSettings = () => {
+      mainView.hidden = true;
+      settingsView.hidden = false;
+    };
+
+    const store = (analytics: boolean, marketing: boolean) => {
+      const consent: Consent = {
+        necessary: true,
+        analytics,
+        marketing,
+        timestamp: new Date().toISOString(),
+        version: VERSION
+      };
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+      } catch {}
+      window.dispatchEvent(new CustomEvent("mira:consent", { detail: consent }));
+    };
+
+    let existing: Consent | null = null;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Consent;
+        if (parsed && parsed.version === VERSION) existing = parsed;
+      }
+    } catch {}
+
+    if (!existing) {
+      show();
+    } else {
+      window.dispatchEvent(new CustomEvent("mira:consent", { detail: existing }));
+    }
+
+    banner.addEventListener("click", (event) => {
+      const target = (event.target as HTMLElement).closest<HTMLElement>("[data-cookie-action]");
+      if (!target) return;
+      const action = target.dataset.cookieAction;
+      if (action === "accept") {
+        store(true, true);
+        hide();
+      } else if (action === "reject") {
+        store(false, false);
+        hide();
+      } else if (action === "settings") {
+        showSettings();
+      } else if (action === "save") {
+        store(analyticsInput.checked, marketingInput.checked);
+        hide();
+      }
+    });
+
+    (window as unknown as { miraOpenCookieSettings?: () => void }).miraOpenCookieSettings = () => {
+      mainView.hidden = false;
+      settingsView.hidden = true;
+      if (existing) {
+        analyticsInput.checked = existing.analytics;
+        marketingInput.checked = existing.marketing;
+      }
+      show();
+      showSettings();
+    };
+  }
+</script>
