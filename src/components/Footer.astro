@@ -14,11 +14,11 @@ const content = siteContent[locale];
   <div class="mira-divider text-center"><span class="mira-divider-text">Meer weten over Mira Software?</span></div>
   <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
     <div class="space-y-3">
-      <p class="text-xl font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-red)]">MIRA Software</p>
+      <p class="text-xl font-semibold uppercase tracking-[0.08em] text-mira-red-light">MIRA Software</p>
       <p class="text-sm text-slate-200">{content.footer.tagline}</p>
     </div>
     <div class="space-y-2 text-sm text-slate-200">
-      <p class="font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-red)]">Info</p>
+      <p class="font-semibold uppercase tracking-[0.08em] text-mira-red-light">Info</p>
       <p>{content.footer.company}</p>
       <a class="block text-white hover:text-[var(--color-mira-red)] hover:underline" href="mailto:sales@mirasoftware.be">
         sales@mirasoftware.be
@@ -26,7 +26,7 @@ const content = siteContent[locale];
       <a class="block text-white hover:text-[var(--color-mira-red)] hover:underline" href="tel:+3252520749">+32 (0)52 52 07 49</a>
     </div>
     <div class="space-y-3 text-sm">
-      <p class="font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-red)]">{content.footer.newsletter}</p>
+      <p class="font-semibold uppercase tracking-[0.08em] text-mira-red-light">{content.footer.newsletter}</p>
       <p class="text-slate-200">Mis nooit meer tips, webinars en updates over materiaalbeheer.</p>
       <a
         href={getPath(locale, "contact")}
