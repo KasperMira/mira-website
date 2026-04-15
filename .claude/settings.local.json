@@ -6,7 +6,8 @@
       "Bash(mv public/images/original/* src/assets/images/)",
       "Bash(rmdir public/images/original)",
       "Bash(rmdir public/images)",
-      "Bash(npx astro *)"
+      "Bash(npx astro *)",
+      "Bash(npm install *)"
     ]
   }
 }
