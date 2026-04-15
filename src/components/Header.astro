@@ -10,20 +10,25 @@ interface Props {
 const { locale, pageKey } = Astro.props;
 const content = siteContent[locale];
 const moduleKeys: PageKey[] = ["moduleRegistration", "moduleReservation", "moduleStock", "moduleMaintenance"];
+const rawBasePath = import.meta.env.BASE_URL || "/";
+const basePath = rawBasePath.endsWith("/") ? rawBasePath : `${rawBasePath}/`;
+const logoSrc = `${basePath}images/original/logo-mira.jpg`;
 ---
 
-<header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-    <a href={getPath(locale, "home")} class="text-xl font-bold tracking-tight text-emerald-700">MIRA</a>
-    <nav class="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
-      <a class={pageKey === "home" ? "text-emerald-700" : ""} href={getPath(locale, "home")}>{content.nav.home}</a>
-      <a class={pageKey === "aboutMira" ? "text-emerald-700" : ""} href={getPath(locale, "aboutMira")}>{content.nav.aboutMira}</a>
+<header class="sticky top-0 z-30 border-b border-black/15 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <a href={getPath(locale, "home")} class="inline-flex items-center">
+      <img src={logoSrc} alt="Mira Software" class="h-10 w-10 object-cover" />
+    </a>
+    <nav class="hidden items-center gap-6 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-slate-700 md:flex">
+      <a class={pageKey === "home" ? "text-[var(--color-mira-red)]" : ""} href={getPath(locale, "home")}>{content.nav.home}</a>
+      <a class={pageKey === "aboutMira" ? "text-[var(--color-mira-red)]" : ""} href={getPath(locale, "aboutMira")}>{content.nav.aboutMira}</a>
       <details class="group relative">
         <summary class="list-none cursor-pointer">{content.nav.modules}</summary>
-        <div class="absolute left-0 mt-3 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
+        <div class="absolute left-0 mt-3 w-80 rounded-sm border border-slate-200 bg-white p-2 shadow-lg">
           {moduleKeys.map((key) => (
             <a
-              class={`block rounded-lg px-3 py-2 text-sm hover:bg-slate-100 ${pageKey === key ? "text-emerald-700" : ""}`}
+              class={`block rounded-sm px-3 py-2 text-xs uppercase tracking-[0.08em] hover:bg-slate-100 ${pageKey === key ? "text-[var(--color-mira-red)]" : ""}`}
               href={getPath(locale, key)}
             >
               {content.nav[key]}
@@ -31,15 +36,17 @@ const moduleKeys: PageKey[] = ["moduleRegistration", "moduleReservation", "modul
           ))}
         </div>
       </details>
-      <a class={pageKey === "aboutUs" ? "text-emerald-700" : ""} href={getPath(locale, "aboutUs")}>{content.nav.aboutUs}</a>
-      <a class={pageKey === "contact" ? "text-emerald-700" : ""} href={getPath(locale, "contact")}>{content.nav.contact}</a>
+      <a class={pageKey === "aboutUs" ? "text-[var(--color-mira-red)]" : ""} href={getPath(locale, "aboutUs")}>{content.nav.aboutUs}</a>
+      <a class={pageKey === "contact" ? "text-[var(--color-mira-red)]" : ""} href={getPath(locale, "contact")}>{content.nav.contact}</a>
     </nav>
     <div class="flex items-center gap-2">
       {locales.map((targetLocale) => (
         <a
           href={getPath(targetLocale, pageKey)}
-          class={`rounded-md px-2 py-1 text-xs font-semibold uppercase ${
-            targetLocale === locale ? "bg-emerald-700 text-white" : "bg-slate-100 text-slate-700"
+          class={`rounded-sm border px-2 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.08em] ${
+            targetLocale === locale
+              ? "border-[var(--color-mira-red)] bg-[var(--color-mira-red)] text-white"
+              : "border-slate-300 bg-white text-slate-700"
           }`}
           aria-label={localeLabels[targetLocale]}
         >

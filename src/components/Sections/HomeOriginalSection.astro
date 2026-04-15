@@ -1,0 +1,188 @@
+---
+import { getPath, type Locale } from "../../data/i18n";
+import { siteContent } from "../../data/site-content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = siteContent[locale];
+const rawBasePath = import.meta.env.BASE_URL || "/";
+const basePath = rawBasePath.endsWith("/") ? rawBasePath : `${rawBasePath}/`;
+const asset = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
+---
+
+<section class="relative overflow-hidden text-white">
+  <img src={asset("/images/original/hero-bg.jpg")} alt="" class="absolute inset-0 h-full w-full object-cover" />
+  <div class="absolute inset-0 bg-black/52"></div>
+  <div class="relative mx-auto max-w-6xl px-4 py-20 md:py-24">
+    <h1 class="max-w-3xl text-4xl uppercase leading-tight md:text-6xl">Beheer materiaal<br />efficient en eenvoudig</h1>
+    <p class="mt-5 max-w-2xl text-base text-slate-100 md:text-lg">
+      Gebruik MIRA Software om inzicht te krijgen in het gebruik en verbruik van groot en klein materiaal in uw organisatie.
+    </p>
+    <a
+      href={getPath(locale, "contact")}
+      class="mt-7 inline-flex rounded-sm bg-[var(--color-mira-red)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:brightness-110"
+    >
+      Boek een gratis demo
+    </a>
+  </div>
+</section>
+
+<section class="bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-14 md:py-16">
+    <h2 class="mira-section-title">MIRA Software voor beheer van al uw materiaal</h2>
+    <p class="mt-4 max-w-4xl text-slate-600">
+      Software voor opvolging materiaal, gereedschapsbeheer en materiaalbeheer. Opvolging van gebruik en verbruik.
+    </p>
+    <div class="mt-10 grid items-start gap-8 md:grid-cols-[0.95fr_1.05fr]">
+      <img src={asset("/images/original/software-screenshot.jpg")} alt="Software opvolging materiaal" class="mira-shadow-card w-full border border-slate-200" />
+      <div class="space-y-4 text-slate-700">
+        <p>
+          MIRA geeft u een beter inzicht in het gebruik en verbruik van groot en klein materiaal binnen uw organisatie. Onze software is een
+          totaaloplossing voor materieel- en materiaalbeheer met opvolging van voorraad, gereedschap, keuringen, onderhoud en herstellingen.
+        </p>
+        <div class="grid gap-4 sm:grid-cols-3">
+          <article class="rounded-sm border border-slate-200 bg-slate-50 p-4">
+            <h3 class="text-base uppercase text-[var(--color-mira-charcoal)]">Werk efficienter</h3>
+            <p class="mt-2 text-sm text-slate-600">Verlies minder tijd met zoeken naar het juiste gereedschap.</p>
+          </article>
+          <article class="rounded-sm border border-slate-200 bg-slate-50 p-4">
+            <h3 class="text-base uppercase text-[var(--color-mira-charcoal)]">1 overzicht</h3>
+            <p class="mt-2 text-sm text-slate-600">Geen verspreide Excels, maar een centraal overzicht van al uw materiaal.</p>
+          </article>
+          <article class="rounded-sm border border-slate-200 bg-slate-50 p-4">
+            <h3 class="text-base uppercase text-[var(--color-mira-charcoal)]">Gebruiksvriendelijk</h3>
+            <p class="mt-2 text-sm text-slate-600">Eenvoudig te raadplegen voor beheerder en gebruiker, ook onderweg.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-[var(--color-mira-soft)]">
+  <div class="mx-auto max-w-6xl px-4 py-14 md:py-16">
+    <h2 class="mira-section-title">Materiaal en materieel opvolgen</h2>
+    <div class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {[
+        { t: "Uitlenen", d: "Wie heeft iets gebruikt? Waar en hoe lang? Wie bracht het terug?", href: getPath(locale, "moduleRegistration") },
+        { t: "Reserveren", d: "Is het toestel beschikbaar en staat materiaal op tijd klaar?", href: getPath(locale, "moduleReservation") },
+        { t: "Stock beheren", d: "Wanneer aanvullen? Wat is de voorraad en actuele waarde?", href: getPath(locale, "moduleStock") },
+        { t: "Onderhoud bijhouden", d: "Wat is de historiek en wanneer is inspectie of keuring nodig?", href: getPath(locale, "moduleMaintenance") }
+      ].map((item) => (
+        <article class="mira-shadow-card rounded-sm border border-slate-200 bg-white p-6">
+          <div class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-mira-red)] text-xl text-white">+</div>
+          <h3 class="text-xl uppercase text-[var(--color-mira-charcoal)]">{item.t}</h3>
+          <p class="mt-2 text-sm text-slate-600">{item.d}</p>
+          <a class="mt-4 inline-block text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-red)]" href={item.href}>module</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="mira-divider py-2 text-center">Materiaalbeheer bij u?</section>
+
+<section class="bg-white">
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-14 md:grid-cols-[1.2fr_0.8fr] md:py-16">
+    <div>
+      <h2 class="mira-section-title">Heeft u al nagedacht over uw materiaalbeheer?</h2>
+      <p class="mt-5 text-slate-700">
+        Hoe wordt er in uw organisatie met bedrijfsmiddelen omgegaan? Heeft u een duidelijk overzicht van voorraad en gebruik? Koopt u soms
+        materiaal dubbel aan of te laat? MIRA helpt u controle en structuur opbouwen.
+      </p>
+      <a href={getPath(locale, "aboutMira")} class="mt-6 inline-flex rounded-sm bg-[var(--color-mira-red)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.08em] text-white">
+        Ontdek MIRA
+      </a>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-1">
+      <img src={asset("/images/original/app-working.jpg")} alt="" class="mira-shadow-card w-full border border-slate-200 object-cover" />
+      <img src={asset("/images/original/pc-mira.jpg")} alt="" class="mira-shadow-card w-full border border-slate-200 object-cover" />
+    </div>
+  </div>
+</section>
+
+<section class="mira-divider py-2 text-center">Zo kan het dus ook!</section>
+
+<section class="bg-[var(--color-mira-soft)]">
+  <div class="mx-auto max-w-6xl px-4 py-14 md:py-16">
+    <h2 class="mira-section-title">Zo kan het dus ook!</h2>
+    <p class="mt-4 max-w-3xl text-slate-700">
+      Bekijk hoe eenvoudig u materiaal en verbruiksgoederen registreert op naam van medewerker, klant of project.
+    </p>
+    <a href="https://www.youtube.com/watch?v=94YJrvXbbFA" class="mt-7 block max-w-3xl">
+      <div class="relative overflow-hidden border border-slate-300">
+        <img src={asset("/images/original/video-thumb.jpg")} alt="MIRA software video" class="h-full w-full object-cover" />
+        <div class="absolute inset-0 grid place-items-center bg-black/30 text-6xl text-white">▶</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="mira-divider py-2 text-center">Voor elke organisatie waar materiaal beweegt</section>
+
+<section class="bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-14 md:py-16">
+    <div class="grid gap-4 md:grid-cols-3">
+      {[
+        {
+          logo: asset("/images/original/logo-jdn.png"),
+          quote:
+            "Als ik slechts een aspect van MIRA mag aanraden, is het de gebruiksvriendelijkheid: weinig handelingen en zeer eenvoudig aanpasbaar.",
+          author: "Karel Maartens",
+          role: "Logistiek Jan De Nul - A11"
+        },
+        {
+          logo: asset("/images/original/logo-mediahuis.png"),
+          quote:
+            "Door de implementatie van Mira Software hebben we een duidelijk overzicht over het beheer van materieel in ons magazijn.",
+          author: "Walter Langmans",
+          role: "Mediahuis"
+        },
+        {
+          logo: asset("/images/original/logo-samoco.png"),
+          quote:
+            "MIRA heeft ons geholpen structuur te brengen in het magazijn en de automatisering zichtbaar te verhogen.",
+          author: "Kjell Meire",
+          role: "Samoco NV"
+        }
+      ].map((item) => (
+        <article class="mira-shadow-card rounded-sm border border-slate-200 bg-white p-6">
+          <img src={item.logo} alt={item.role} class="h-14 w-auto object-contain" />
+          <p class="mt-4 text-sm text-slate-700">"{item.quote}"</p>
+          <p class="mt-4 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-red)]">{item.author}</p>
+          <p class="text-xs text-slate-500">{item.role}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="bg-[var(--color-mira-soft)]">
+  <div class="mx-auto max-w-6xl px-4 py-14 md:py-16">
+    <h2 class="mira-section-title">MIRA Software in alle sectoren</h2>
+    <p class="mt-4 max-w-4xl text-slate-700">
+      {content.pages.home.sections[2]?.type === "list"
+        ? "Onze software is inzetbaar in elke organisatie waar materiaal, gereedschap en verbruiksgoederen bewegen."
+        : ""}
+    </p>
+    <div class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {[
+        { image: asset("/images/original/sector-bouw.jpg"), title: "Bouwbedrijven" },
+        { image: asset("/images/original/sector-installatie.jpg"), title: "Installatietechniek" },
+        { image: asset("/images/original/sector-overheid.jpg"), title: "Overheid & lokaal bestuur" },
+        { image: asset("/images/original/sector-maritiem.jpg"), title: "Maritieme sector" },
+        { image: asset("/images/original/sector-onderwijs.jpg"), title: "Onderwijs & cultuur" },
+        { image: asset("/images/original/sector-andere.jpg"), title: "En ook andere bedrijven!" }
+      ].map((sector) => (
+        <article class="group relative overflow-hidden border border-slate-300">
+          <img src={sector.image} alt={sector.title} class="h-44 w-full object-cover transition duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-black/20"></div>
+          <p class="absolute bottom-0 w-full bg-black/60 px-3 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-white">{sector.title}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

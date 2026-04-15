@@ -1,7 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Open Sans", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Oswald", "Open Sans", sans-serif;
+  --color-mira-yellow: #f2ce2f;
+  --color-mira-red: #d8232a;
+  --color-mira-charcoal: #202326;
+  --color-mira-graphite: #34383c;
+  --color-mira-soft: #f3f4f5;
 }
 
 html {
@@ -10,4 +17,33 @@ html {
 
 body {
   font-family: var(--font-sans);
+  background: var(--color-mira-soft);
+  color: #1f2937;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+.mira-section-title {
+  color: var(--color-mira-charcoal);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  text-transform: uppercase;
+}
+
+.mira-divider {
+  background: linear-gradient(90deg, #24272a 0%, #3a3f44 100%);
+  color: #fff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.mira-shadow-card {
+  box-shadow: 0 12px 30px rgba(28, 32, 36, 0.12);
 }

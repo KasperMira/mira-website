@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://kaspermira.github.io/mira-website/sitemap-index.xml
