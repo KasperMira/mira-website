@@ -1,0 +1,17 @@
+---
+import { siteContent } from "../data/site-content";
+import { type Locale } from "../data/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HomeOriginalSection from "./Sections/HomeOriginalSection.astro";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = siteContent[locale].pages.home;
+---
+
+<BaseLayout locale={locale} pageKey="home" title={page.seoTitle} description={page.seoDescription}>
+  <HomeOriginalSection locale={locale} />
+</BaseLayout>

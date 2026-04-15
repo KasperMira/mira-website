@@ -4,11 +4,10 @@ import { siteContent } from "../data/site-content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSection from "./Sections/HeroSection.astro";
 import ContentSections from "./Sections/ContentSections.astro";
-import HomeOriginalSection from "./Sections/HomeOriginalSection.astro";
 
 interface Props {
   locale: Locale;
-  pageKey: PageKey;
+  pageKey: Exclude<PageKey, "home">;
 }
 
 const { locale, pageKey } = Astro.props;
@@ -16,22 +15,14 @@ const page = siteContent[locale].pages[pageKey];
 ---
 
 <BaseLayout locale={locale} pageKey={pageKey} title={page.seoTitle} description={page.seoDescription}>
-  {
-    pageKey === "home" ? (
-      <HomeOriginalSection locale={locale} />
-    ) : (
-      <>
-        <HeroSection
-          eyebrow={page.hero.eyebrow}
-          title={page.hero.title}
-          subtitle={page.hero.subtitle}
-          primaryLabel={page.hero.primaryLabel}
-          secondaryLabel={page.hero.secondaryLabel}
-          primaryHref={getPath(locale, "contact")}
-          secondaryHref={getPath(locale, "aboutMira")}
-        />
-        <ContentSections sections={page.sections} />
-      </>
-    )
-  }
+  <HeroSection
+    eyebrow={page.hero.eyebrow}
+    title={page.hero.title}
+    subtitle={page.hero.subtitle}
+    primaryLabel={page.hero.primaryLabel}
+    secondaryLabel={page.hero.secondaryLabel}
+    primaryHref={getPath(locale, "contact")}
+    secondaryHref={getPath(locale, "aboutMira")}
+  />
+  <ContentSections sections={page.sections} />
 </BaseLayout>

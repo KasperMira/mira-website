@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat astro.config.*)",
+      "Bash(mkdir -p src/assets/images)",
+      "Bash(mv public/images/original/* src/assets/images/)",
+      "Bash(rmdir public/images/original)",
+      "Bash(rmdir public/images)",
+      "Bash(npx astro *)"
+    ]
+  }
+}

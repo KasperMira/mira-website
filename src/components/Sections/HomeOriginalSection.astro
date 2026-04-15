@@ -1,6 +1,21 @@
 ---
+import { Image } from "astro:assets";
 import { getPath, type Locale } from "../../data/i18n";
 import { siteContent } from "../../data/site-content";
+import heroBg from "../../assets/images/hero-bg.jpg";
+import softwareScreenshot from "../../assets/images/software-screenshot.jpg";
+import appWorking from "../../assets/images/app-working.jpg";
+import pcMira from "../../assets/images/pc-mira.jpg";
+import videoThumb from "../../assets/images/video-thumb.jpg";
+import logoJdn from "../../assets/images/logo-jdn.png";
+import logoMediahuis from "../../assets/images/logo-mediahuis.png";
+import logoSamoco from "../../assets/images/logo-samoco.png";
+import sectorBouw from "../../assets/images/sector-bouw.jpg";
+import sectorInstallatie from "../../assets/images/sector-installatie.jpg";
+import sectorOverheid from "../../assets/images/sector-overheid.jpg";
+import sectorMaritiem from "../../assets/images/sector-maritiem.jpg";
+import sectorOnderwijs from "../../assets/images/sector-onderwijs.jpg";
+import sectorAndere from "../../assets/images/sector-andere.jpg";
 
 interface Props {
   locale: Locale;
@@ -8,13 +23,20 @@ interface Props {
 
 const { locale } = Astro.props;
 const content = siteContent[locale];
-const rawBasePath = import.meta.env.BASE_URL || "/";
-const basePath = rawBasePath.endsWith("/") ? rawBasePath : `${rawBasePath}/`;
-const asset = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
 ---
 
 <section class="relative overflow-hidden text-white">
-  <img src={asset("/images/original/hero-bg.jpg")} alt="" class="absolute inset-0 h-full w-full object-cover" />
+  <Image
+    src={heroBg}
+    alt=""
+    widths={[640, 960, 1280, 1920]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    format="avif"
+    quality={70}
+    class="absolute inset-0 h-full w-full object-cover"
+  />
   <div class="absolute inset-0 bg-black/52"></div>
   <div class="relative mx-auto max-w-6xl px-4 py-20 md:py-24">
     <h1 class="max-w-3xl text-4xl uppercase leading-tight md:text-6xl">Beheer materiaal<br />efficient en eenvoudig</h1>
@@ -37,7 +59,7 @@ const asset = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
       Software voor opvolging materiaal, gereedschapsbeheer en materiaalbeheer. Opvolging van gebruik en verbruik.
     </p>
     <div class="mt-10 grid items-start gap-8 md:grid-cols-[0.95fr_1.05fr]">
-      <img src={asset("/images/original/software-screenshot.jpg")} alt="Software opvolging materiaal" class="mira-shadow-card w-full border border-slate-200" />
+      <Image src={softwareScreenshot} alt="Software opvolging materiaal" widths={[400, 640, 900]} sizes="(min-width: 768px) 45vw, 100vw" loading="lazy" decoding="async" class="mira-shadow-card w-full border border-slate-200" />
       <div class="space-y-4 text-slate-700">
         <p>
           MIRA geeft u een beter inzicht in het gebruik en verbruik van groot en klein materiaal binnen uw organisatie. Onze software is een
@@ -98,8 +120,8 @@ const asset = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
       </a>
     </div>
     <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-1">
-      <img src={asset("/images/original/app-working.jpg")} alt="" class="mira-shadow-card w-full border border-slate-200 object-cover" />
-      <img src={asset("/images/original/pc-mira.jpg")} alt="" class="mira-shadow-card w-full border border-slate-200 object-cover" />
+      <Image src={appWorking} alt="" widths={[320, 500, 700]} sizes="(min-width: 768px) 30vw, 50vw" loading="lazy" decoding="async" class="mira-shadow-card w-full border border-slate-200 object-cover" />
+      <Image src={pcMira} alt="" widths={[320, 500, 700]} sizes="(min-width: 768px) 30vw, 50vw" loading="lazy" decoding="async" class="mira-shadow-card w-full border border-slate-200 object-cover" />
     </div>
   </div>
 </section>
@@ -114,7 +136,7 @@ const asset = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
     </p>
     <a href="https://www.youtube.com/watch?v=94YJrvXbbFA" class="mt-7 block max-w-3xl">
       <div class="relative overflow-hidden border border-slate-300">
-        <img src={asset("/images/original/video-thumb.jpg")} alt="MIRA software video" class="h-full w-full object-cover" />
+        <Image src={videoThumb} alt="MIRA software video" widths={[480, 720, 960]} sizes="(min-width: 768px) 768px, 100vw" loading="lazy" decoding="async" class="h-full w-full object-cover" />
         <div class="absolute inset-0 grid place-items-center bg-black/30 text-6xl text-white">▶</div>
       </div>
     </a>
@@ -128,21 +150,21 @@ const asset = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
     <div class="grid gap-4 md:grid-cols-3">
       {[
         {
-          logo: asset("/images/original/logo-jdn.png"),
+          logo: logoJdn,
           quote:
             "Als ik slechts een aspect van MIRA mag aanraden, is het de gebruiksvriendelijkheid: weinig handelingen en zeer eenvoudig aanpasbaar.",
           author: "Karel Maartens",
           role: "Logistiek Jan De Nul - A11"
         },
         {
-          logo: asset("/images/original/logo-mediahuis.png"),
+          logo: logoMediahuis,
           quote:
             "Door de implementatie van Mira Software hebben we een duidelijk overzicht over het beheer van materieel in ons magazijn.",
           author: "Walter Langmans",
           role: "Mediahuis"
         },
         {
-          logo: asset("/images/original/logo-samoco.png"),
+          logo: logoSamoco,
           quote:
             "MIRA heeft ons geholpen structuur te brengen in het magazijn en de automatisering zichtbaar te verhogen.",
           author: "Kjell Meire",
@@ -150,7 +172,7 @@ const asset = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
         }
       ].map((item) => (
         <article class="mira-shadow-card rounded-sm border border-slate-200 bg-white p-6">
-          <img src={item.logo} alt={item.role} class="h-14 w-auto object-contain" />
+          <Image src={item.logo} alt={item.role} height={56} loading="lazy" decoding="async" class="h-14 w-auto object-contain" />
           <p class="mt-4 text-sm text-slate-700">"{item.quote}"</p>
           <p class="mt-4 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-mira-red)]">{item.author}</p>
           <p class="text-xs text-slate-500">{item.role}</p>
@@ -170,15 +192,15 @@ const asset = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
     </p>
     <div class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {[
-        { image: asset("/images/original/sector-bouw.jpg"), title: "Bouwbedrijven" },
-        { image: asset("/images/original/sector-installatie.jpg"), title: "Installatietechniek" },
-        { image: asset("/images/original/sector-overheid.jpg"), title: "Overheid & lokaal bestuur" },
-        { image: asset("/images/original/sector-maritiem.jpg"), title: "Maritieme sector" },
-        { image: asset("/images/original/sector-onderwijs.jpg"), title: "Onderwijs & cultuur" },
-        { image: asset("/images/original/sector-andere.jpg"), title: "En ook andere bedrijven!" }
+        { image: sectorBouw, title: "Bouwbedrijven" },
+        { image: sectorInstallatie, title: "Installatietechniek" },
+        { image: sectorOverheid, title: "Overheid & lokaal bestuur" },
+        { image: sectorMaritiem, title: "Maritieme sector" },
+        { image: sectorOnderwijs, title: "Onderwijs & cultuur" },
+        { image: sectorAndere, title: "En ook andere bedrijven!" }
       ].map((sector) => (
         <article class="group relative overflow-hidden border border-slate-300">
-          <img src={sector.image} alt={sector.title} class="h-44 w-full object-cover transition duration-500 group-hover:scale-105" />
+          <Image src={sector.image} alt={sector.title} widths={[320, 480, 640]} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" loading="lazy" decoding="async" class="h-44 w-full object-cover transition duration-500 group-hover:scale-105" />
           <div class="absolute inset-0 bg-black/20"></div>
           <p class="absolute bottom-0 w-full bg-black/60 px-3 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-white">{sector.title}</p>
         </article>

@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { getPath, localeLabels, locales, type Locale, type PageKey } from "../data/i18n";
 import { siteContent } from "../data/site-content";
+import logoMira from "../assets/images/logo-mira.jpg";
 
 interface Props {
   locale: Locale;
@@ -10,15 +12,12 @@ interface Props {
 const { locale, pageKey } = Astro.props;
 const content = siteContent[locale];
 const moduleKeys: PageKey[] = ["moduleRegistration", "moduleReservation", "moduleStock", "moduleMaintenance"];
-const rawBasePath = import.meta.env.BASE_URL || "/";
-const basePath = rawBasePath.endsWith("/") ? rawBasePath : `${rawBasePath}/`;
-const logoSrc = `${basePath}images/original/logo-mira.jpg`;
 ---
 
 <header class="sticky top-0 z-30 border-b border-black/15 bg-white/95 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
     <a href={getPath(locale, "home")} class="inline-flex items-center">
-      <img src={logoSrc} alt="Mira Software" class="h-10 w-10 object-cover" />
+      <Image src={logoMira} alt="Mira Software" width={40} height={40} loading="eager" class="h-10 w-10 object-cover" />
     </a>
     <nav class="hidden items-center gap-6 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-slate-700 md:flex">
       <a class={pageKey === "home" ? "text-[var(--color-mira-red)]" : ""} href={getPath(locale, "home")}>{content.nav.home}</a>
