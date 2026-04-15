@@ -1,0 +1,19 @@
+---
+import PageTemplate from "../components/PageTemplate.astro";
+import { getPageKeyBySlug, pageKeys, pageSlugs, type PageKey } from "../data/i18n";
+
+export function getStaticPaths() {
+  return pageKeys
+    .filter((key) => key !== "home")
+    .map((key) => ({
+      params: { slug: pageSlugs.nl[key] },
+      props: { pageKey: key }
+    }));
+}
+
+const { pageKey } = Astro.props as { pageKey: PageKey };
+const derived = getPageKeyBySlug("nl", Astro.params.slug ?? "");
+const resolvedKey = derived ?? pageKey;
+---
+
+<PageTemplate locale="nl" pageKey={resolvedKey} />

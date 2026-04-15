@@ -1,0 +1,17 @@
+---
+import PageTemplate from "../../components/PageTemplate.astro";
+import { pageKeys, pageSlugs, type PageKey } from "../../data/i18n";
+
+export function getStaticPaths() {
+  return pageKeys
+    .filter((key) => key !== "home")
+    .map((key) => ({
+      params: { slug: pageSlugs.it[key] },
+      props: { pageKey: key }
+    }));
+}
+
+const { pageKey } = Astro.props as { pageKey: PageKey };
+---
+
+<PageTemplate locale="it" pageKey={pageKey} />
